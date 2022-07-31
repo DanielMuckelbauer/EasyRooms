@@ -41,12 +41,12 @@ public class FilledRoomsProvider : IFilledRoomsProvider
         var filledRooms = _occupationsFiller
             .FillRoomOccupations(plan.Rows, roomNames, savedOptionsBuffer)
             .ToList();
-        Validate(filledRooms);
+        Validate(filledRooms, savedOptionsBuffer);
         return filledRooms;
     }
 
-    private void Validate(IEnumerable<Room> filledRooms)
-        => _ = _validator.IsValid(filledRooms, _persistenceService.SavedOptions.Rooms.ToRoomNames())
+    private void Validate(IEnumerable<Room> filledRooms, int savedOptionsBuffer)
+        => _ = _validator.IsValid(filledRooms, _persistenceService.SavedOptions.Rooms.ToRoomNames(), savedOptionsBuffer)
             ? default(object)
             : throw new RoomsValidationException();
 }
