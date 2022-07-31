@@ -1,3 +1,4 @@
+using EasyRooms.Model.CommonExtensions;
 using EasyRooms.Model.Validation.Interfaces;
 
 namespace EasyRooms.Model.Validation.Implementations;
@@ -11,10 +12,9 @@ public class RoomsValidator : IRoomsValidator
         => room.Occupations.Count > 0
            && RemoveDoublePartnerMassages(room).Occupations
                .All(occupation1 => room.Occupations
-                   .All(occupation2 =>
-                       // todo ignore if occupations have same patient
-                       occupation1.StartTime > occupation2.EndTime.Add(TimeSpan.FromMinutes(savedOptionsBuffer))
-                                       && occupation2.StartTime > occupation1.EndTime.Add(TimeSpan.FromMinutes(savedOptionsBuffer))));
+                   .Any(occupation2 => occupation1.StartTime < occupation2.EndTime.Add(TimeSpan.FromMinutes(savedOptionsBuffer))
+                                       && occupation2.StartTime < occupation1.EndTime.Add(TimeSpan.FromMinutes(savedOptionsBuffer))
+                                       && occupation1.Patient.EqualsInvariant(occupation2.Patient)));
 
     private static Room RemoveDoublePartnerMassages(Room room)
     {

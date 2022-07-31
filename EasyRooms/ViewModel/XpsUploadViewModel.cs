@@ -21,7 +21,7 @@ public class XpsUploadViewModel : BindableBase
     private readonly IPdfWriter _pdfWriter;
     private readonly IMessageBoxShower _messageBoxShower;
     private readonly IFilledRoomsProvider _filledRoomsProvider;
-    private string _fileName = string.Empty;
+    private string _fileName = @"C:\Users\dadam\OneDrive\EasyRooms\Testpläne\Puffer nicht eingehalten Linh 18.07.xps";
 
     public XpsUploadViewModel(
         IFileDialogOpener fileDialogOpener,

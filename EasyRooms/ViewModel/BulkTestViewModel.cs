@@ -14,7 +14,7 @@ public class BulkTestViewModel : BindableBase
     private readonly IFileDialogOpener _dialogOpener;
     private readonly IBulkCalculator _bulkCalculator;
 
-    private string _directory = string.Empty;
+    private string _directory = "C:\\Users\\dadam\\OneDrive\\EasyRooms\\Testpläne";
 
     public BulkTestViewModel(IFileDialogOpener dialogOpener, IBulkCalculator bulkCalculator)
     {
