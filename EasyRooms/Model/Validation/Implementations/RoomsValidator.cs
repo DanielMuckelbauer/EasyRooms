@@ -15,6 +15,7 @@ public class RoomsValidator : IRoomsValidator
                    .Any(occupation2 => occupation1.StartTime < occupation2.EndTime.Add(TimeSpan.FromMinutes(savedOptionsBuffer))
                                        && occupation2.StartTime < occupation1.EndTime.Add(TimeSpan.FromMinutes(savedOptionsBuffer))
                                        && occupation1.Patient.EqualsInvariant(occupation2.Patient)));
+    // todo verify if this ^ algorithm really works (especially for same patient and stuff) and then check why those were added wrongly in the first place
 
     private static Room RemoveDoublePartnerMassages(Room room)
     {
